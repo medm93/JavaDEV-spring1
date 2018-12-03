@@ -7,10 +7,9 @@ import java.util.*;
 
 @Service
 public class UserService {
+    private List<User> users = new ArrayList<>();
 
     public String findUserNickNameByEmail(String email) {
-        List<User> users = getAllUsers();
-
         Optional<User> searchResult =  users.stream().filter(x -> x.getEmail().equals(email)).findAny();
 
         String message = "No user with given email.";
@@ -21,17 +20,11 @@ public class UserService {
         return message;
     }
 
-
     public List<User> getAllUsers() {
-        User user1 = new User(1, "HansKloss", "hans@kloss.com");
-        User user2 = new User(2, "JamesBond", "james@bond.com");
-
-        return new ArrayList<>(Arrays.asList(user1,user2));
+        return users;
     }
 
     public User getUserById(int id) {
-        List<User> users = getAllUsers();
-
         Optional<User> searchResult =  users.stream().filter(x -> x.getId() == id).findAny();
 
         return searchResult.get();
@@ -40,6 +33,7 @@ public class UserService {
     public User createUser(User user) {
         Random random = new Random();
         user.setId(random.nextInt(100));
+        users.add(user);
         return user;
     }
 }
