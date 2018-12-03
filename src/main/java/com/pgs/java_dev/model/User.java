@@ -2,6 +2,7 @@ package com.pgs.java_dev.model;
 
 public class User {
 
+    private long id;
     private String nickName;
     private String email;
 
@@ -21,10 +22,19 @@ public class User {
         this.email = email;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public User() {
     }
 
-    public User(String nickName, String email) {
+    public User(long id, String nickName, String email) {
+        this.id = id;
         this.nickName = nickName;
         this.email = email;
     }
@@ -32,7 +42,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "nickName='" + nickName + '\'' +
+                "id=" + id +
+                ", nickName='" + nickName + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
