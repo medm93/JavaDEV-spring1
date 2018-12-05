@@ -1,5 +1,7 @@
 package com.pgs.java_dev.model;
 
+import java.util.Objects;
+
 public class User {
 
     private long id;
@@ -37,6 +39,20 @@ public class User {
         this.id = id;
         this.nickName = nickName;
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(nickName, user.nickName) &&
+                Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nickName, email);
     }
 
     @Override
