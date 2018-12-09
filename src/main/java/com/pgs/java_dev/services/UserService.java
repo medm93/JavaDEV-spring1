@@ -1,6 +1,8 @@
 package com.pgs.java_dev.services;
 
 import com.pgs.java_dev.model.User;
+import com.pgs.java_dev.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -8,6 +10,9 @@ import java.util.*;
 @Service
 public class UserService {
     private List<User> users = new ArrayList<>();
+
+    @Autowired
+    private UserRepository repository;
 
     public String findUserNickNameByEmail(String email) {
         Optional<User> searchResult =  users.stream().filter(x -> x.getEmail().equals(email)).findAny();
@@ -31,9 +36,6 @@ public class UserService {
     }
 
     public User createUser(User user) {
-        Random random = new Random();
-        user.setId(random.nextInt(100));
-        users.add(user);
-        return user;
+        return  repository.save(user);
     }
 }

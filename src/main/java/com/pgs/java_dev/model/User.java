@@ -1,8 +1,19 @@
 package com.pgs.java_dev.model;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+@Table(name = "Customer")
 public class User {
 
+    @Id
+    @GeneratedValue
     private long id;
+    @NotNull
+    @Size(min = 2, max = 25, message = "nickName must be between 2 and 25 characters")
+    @Column(name = "nick")
     private String nickName;
     private String email;
 
