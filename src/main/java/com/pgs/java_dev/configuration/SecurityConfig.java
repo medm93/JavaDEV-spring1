@@ -2,6 +2,7 @@ package com.pgs.java_dev.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -37,6 +38,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint(restAuthenticationEntryPoint)
                 .and()
                 .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/customers").hasAnyRole("MODERATOR", "USER")
+                .antMatchers(HttpMethod.POST, "/customers").hasAnyRole("MODERATOR")
+                .antMatchers(HttpMethod.PUT, "/customers/{id}").hasAnyRole("MODERATOR")
+                .antMatchers(HttpMethod.DELETE, "/customers/{id}").hasAnyRole("MODERATOR")
+                .antMatchers(HttpMethod.GET, "/products").hasAnyRole("MODERATOR", "USER")
+                .antMatchers(HttpMethod.POST, "/products").hasAnyRole("MODERATOR")
+                .antMatchers(HttpMethod.PUT, "/products/{id}").hasAnyRole("MODERATOR", "USER")
+                .antMatchers(HttpMethod.DELETE, "/products/{id}").hasAnyRole("MODERATOR", "USER")
+                .antMatchers(HttpMethod.GET, "/customers/{id}/products").hasAnyRole("MODERATOR", "USER")
+                .antMatchers(HttpMethod.POST, "/customers/{id}/products").hasAnyRole("MODERATOR", "USER")
                 .antMatchers("/users").hasRole("MODERATOR")
                 .and()
                 .formLogin()

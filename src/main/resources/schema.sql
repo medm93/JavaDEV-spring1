@@ -1,6 +1,6 @@
-create table if not exists Customer (
-id int not null auto_increment,
-nick varchar(25) not null,
-email varchar(30) not null,
-primary key(id)
+CREATE TABLE IF NOT EXISTS user (
+id int NOT NULL auto_increment,
+nick varchar(25) NOT NULL,
+email varchar(30) NOT NULL,
+PRIMARY KEY(id)
 );

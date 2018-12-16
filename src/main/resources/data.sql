@@ -1,4 +1,5 @@
-insert into customer(nick, email)
-values('Ranga', 'blabla@onet.pl');
-insert into customer(nick, email)
-values('Ravi', 'aqwe@gmail.com');
+INSERT INTO user (nick, email)
+VALUES ('Ranga', 'blabla@onet.pl');
+
+INSERT INTO user (nick, email)
+VALUES ('Ravi', 'aqwe@gmail.com');

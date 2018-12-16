@@ -3,6 +3,7 @@ package com.pgs.java_dev.controllers;
 import com.pgs.java_dev.model.User;
 import com.pgs.java_dev.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUser(@PathVariable int id) {
+    public ResponseEntity<?> getUser(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 

@@ -3,6 +3,7 @@ package com.pgs.java_dev.services;
 import com.pgs.java_dev.model.User;
 import com.pgs.java_dev.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,7 +13,7 @@ public class UserService {
     private List<User> users = new ArrayList<>();
 
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
 
     public String findUserNickNameByEmail(String email) {
         Optional<User> searchResult =  users.stream().filter(x -> x.getEmail().equals(email)).findAny();
@@ -26,16 +27,18 @@ public class UserService {
     }
 
     public List<User> getAllUsers() {
-        return users;
+        return userRepository.findAll();
     }
 
-    public User getUserById(int id) {
-        Optional<User> searchResult =  users.stream().filter(x -> x.getId() == id).findAny();
-
-        return searchResult.get();
+    public ResponseEntity<?> getUserById(Long id) {
+        Optional<User> searchResult = userRepository.findById(id);
+        if (!searchResult.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(searchResult.get());
     }
 
     public User createUser(User user) {
-        return  repository.save(user);
+        return  userRepository.save(user);
     }
 }
